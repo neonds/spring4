@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Main Layout</title>
+<th:block th:fragment="style">
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+		href="webjars/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/resources/css/common.css}" href="resources/css/common.css">
+</th:block>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top"
+		th:fragment="header">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}"
+					th:text="#{home.index.brand}">Project name</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:href="@{/}" href="#">Home</a></li>
+					<li><a th:href="@{/about}" href="/about">About</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+	<div th:fragment="footer"></div>
+	<th:block th:fragment="javascript">
+		<script type="text/javascript"
+			src="webjars/jquery/2.2.4/jquery.min.js"
+			th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
+		<script type="text/javascript"
+			src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"
+			th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" src="/resources/js/common.js"
+			th:src="@{/resources/js/common.js}"></script>
+	</th:block>
+</body>
+</html>
