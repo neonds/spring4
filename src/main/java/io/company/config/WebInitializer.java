@@ -4,25 +4,26 @@ import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.springframework.mobile.device.DeviceResolverRequestFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import com.guillermods.common.security.config.WebCommonSecurityConfig;
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
   private static final String ENCODING = "UTF-8";
 
-
   @Override
   public void onStartup(ServletContext context) throws ServletException {
-    // context.setInitParameter("spring.profiles.active", "test");
     super.onStartup(context);
   }
 
 
   @Override
   protected Class<?>[] getRootConfigClasses() {
-    return new Class[] {ApplicationConfig.class};
+    return new Class[] {ApplicationConfig.class, WebCommonSecurityConfig.class};
   }
 
 
@@ -37,7 +38,8 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     characterEncodingFilter.setEncoding(ENCODING);
     DelegatingFilterProxy securityFilterChain =
         new DelegatingFilterProxy("springSecurityFilterChain");
-    return new Filter[] {characterEncodingFilter, securityFilterChain};
+    DeviceResolverRequestFilter deviceResolverRequestFilter = new DeviceResolverRequestFilter();
+    return new Filter[] {characterEncodingFilter, securityFilterChain, deviceResolverRequestFilter};
   }
 
 

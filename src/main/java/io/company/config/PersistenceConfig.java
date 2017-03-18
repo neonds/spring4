@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -20,11 +19,10 @@ import org.springframework.util.ClassUtils;
 
 import io.company.Application;
 
-@Profile("dev")
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = Application.class)
-public class PersistenceDevConfig {
+public class PersistenceConfig {
 
   private static final String ORG_H2_DRIVER = "org.h2.Driver";
   private static final String CLASSPATH_DB_MIGRATION = "classpath:db/migration";
