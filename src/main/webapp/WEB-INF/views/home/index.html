@@ -15,15 +15,16 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-6">
-				<h3>Home</h3>
-				<div th:text="${serviceMessage}">Default message</div>
+<!-- 				<h3>Home</h3> -->
+<!-- 				<div th:text="${serviceMessage}">Default message</div> -->
+				<div id="home"></div>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
 	</div>
 	<div th:replace="layouts/main :: footer"></div>
 	<th:block th:replace="layouts/main :: javascript"></th:block>
-	<script type="text/javascript" src="/resources/js/common.js"
+	<script type="text/babel" src="/resources/js/common.js"
 		th:src="@{/resources/js/home/home.js}"></script>
 </body>
 </html>
