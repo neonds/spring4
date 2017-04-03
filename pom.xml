@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>io.company</groupId>
-  <artifactId>spring4</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.company</groupId>
+	<artifactId>spring4</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+
+	<properties>
 		<!-- Environment -->
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,8 +32,9 @@
 
 		<!-- Testing -->
 		<junit.version>4.12</junit.version>
-		
-		
+		<mockito-core.version>2.7.20</mockito-core.version>
+
+
 		<!-- Front end -->
 		<jquery.version>2.2.4</jquery.version>
 		<bootstrap.version>3.3.6</bootstrap.version>
@@ -161,6 +163,14 @@
 			<scope>test</scope>
 			<version>${junit.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito-core.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- Webjars -->
 		<dependency>
 			<groupId>org.webjars</groupId>

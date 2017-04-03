@@ -5,10 +5,10 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.flywaydb.core.Flyway;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -20,37 +20,36 @@ import org.springframework.util.ClassUtils;
 
 import io.company.Application;
 
-@Profile("dev")
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = Application.class)
-public class PersistenceDevConfig {
-
-  private static final String ORG_H2_DRIVER = "org.h2.Driver";
-  private static final String CLASSPATH_DB_MIGRATION = "classpath:db/migration";
-  private static final String USER_DB = "sa";
-  private static final String PASSWORD_DB = "";
-  private static final String JDBC_URL =
-      "jdbc:h2:mem:migrationtestdb;DB_CLOSE_DELAY=-1;TRACE_LEVEL_SYSTEM_OUT=1";
+public class PersistenceConfig {
 
 
+  private static final String DATASOURCE_PASSWORD = "datasource.password";
+
+  private static final String DATASOURCE_USERNAME = "datasource.username";
+
+  private static final String DATASOURCE_URL = "datasource.url";
+
+  private static final String DATASOURCE_DRIVER = "datasource.driver";
+  
+  private static final String APP_NAME = "app.name";
+  
+
+  @Autowired
+  private Environment env;
+  
   @Bean
   public DataSource dataSource() throws SQLException {
-    try {
-      Class.forName(ORG_H2_DRIVER);
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
+
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    dataSource.setUsername(USER_DB);
-    dataSource.setPassword(PASSWORD_DB);
-    dataSource.setUrl(JDBC_URL);
-    Flyway flyway = new Flyway();
-    flyway.setLocations(CLASSPATH_DB_MIGRATION);
-    flyway.setClassLoader(this.getClass().getClassLoader());
-    flyway.setDataSource(dataSource);
-    flyway.migrate();
-    return flyway.getDataSource();
+    dataSource.setDriverClassName(env.getProperty(DATASOURCE_DRIVER));
+    dataSource.setUrl(env.getProperty(DATASOURCE_URL));
+    dataSource.setUsername(env.getProperty(DATASOURCE_USERNAME));
+    dataSource.setPassword(env.getProperty(DATASOURCE_PASSWORD));
+    
+    return dataSource;
   }
 
 
@@ -59,7 +58,7 @@ public class PersistenceDevConfig {
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws SQLException {
     LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
     em.setDataSource(dataSource());
-    em.setPersistenceUnitName("default");
+    em.setPersistenceUnitName(env.getProperty(APP_NAME));
     em.setPackagesToScan(ClassUtils.getPackageName(Application.class));
     JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
     em.setJpaVendorAdapter(vendorAdapter);

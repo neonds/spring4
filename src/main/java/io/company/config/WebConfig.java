@@ -17,7 +17,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 @Configuration
 @EnableWebMvc
-public class WebConfig extends WebMvcConfigurerAdapter{
+public class WebConfig extends WebMvcConfigurerAdapter {
 
 
   private static final String TEMPLATE_MODE = "HTML";
@@ -73,10 +73,11 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 
   @Bean(name = "messageSource")
   public MessageSource messageSource() {
-      ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-      messageSource.setBasename(MESSAGE_SOURCE);
-      messageSource.setCacheSeconds(5);
-      return messageSource;
+    ReloadableResourceBundleMessageSource messageSource =
+        new ReloadableResourceBundleMessageSource();
+    messageSource.setBasename(MESSAGE_SOURCE);
+    messageSource.setCacheSeconds(5);
+    return messageSource;
   }
 
 
