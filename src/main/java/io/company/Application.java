@@ -1,3 +1,4 @@
 package io.company;
 
-public interface Application {}
+public interface Application {
+}

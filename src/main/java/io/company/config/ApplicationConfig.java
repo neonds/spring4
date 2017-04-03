@@ -9,7 +9,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import io.company.Application;
 
 @Configuration
-@PropertySource("classpath:persistence.properties")
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackageClasses = Application.class)
 public class ApplicationConfig {
@@ -18,6 +17,5 @@ public class ApplicationConfig {
   public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
     return new PropertySourcesPlaceholderConfigurer();
   }
-
-
+  
 }
