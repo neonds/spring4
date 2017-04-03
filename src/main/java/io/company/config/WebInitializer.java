@@ -5,6 +5,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -14,7 +15,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
   /**
    * Uncomment for spring security config
    */
-  // private static final String SPRING_SECURITY_FILTER_CHAIN = "springSecurityFilterChain";
+  private static final String SPRING_SECURITY_FILTER_CHAIN = "springSecurityFilterChain";
   private static final String ENCODING = "UTF-8";
 
 
@@ -45,11 +46,11 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     /**
      * Just necesary if you add Spring security
      */
-    // DelegatingFilterProxy securityFilterChain = new
-    // DelegatingFilterProxy(SPRING_SECURITY_FILTER_CHAIN);
-    // return new Filter[] {characterEncodingFilter, securityFilterChain};
+    DelegatingFilterProxy securityFilterChain =
+        new DelegatingFilterProxy(SPRING_SECURITY_FILTER_CHAIN);
+    return new Filter[] {characterEncodingFilter, securityFilterChain};
 
-    return new Filter[] {characterEncodingFilter};
+    // return new Filter[] {characterEncodingFilter};
 
   }
 
