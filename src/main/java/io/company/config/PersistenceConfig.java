@@ -5,7 +5,6 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +36,6 @@ public class PersistenceConfig {
   
   private static final String APP_NAME = "app.name";
   
-  private static final String CLASSPATH_DB_MIGRATION = "classpath:db/migration";
 
   @Autowired
   private Environment env;
@@ -51,14 +49,7 @@ public class PersistenceConfig {
     dataSource.setUsername(env.getProperty(DATASOURCE_USERNAME));
     dataSource.setPassword(env.getProperty(DATASOURCE_PASSWORD));
     
-    //Flyway Migration, not necesary for existing Schema in database
-    Flyway flyway = new Flyway();
-    flyway.setLocations(CLASSPATH_DB_MIGRATION);
-    flyway.setClassLoader(this.getClass().getClassLoader());
-    flyway.setDataSource(dataSource);
-    flyway.migrate();
-    
-    return flyway.getDataSource();
+    return dataSource;
   }
 
 
