@@ -38,20 +38,11 @@
 	</nav>
 	<div th:fragment="footer"></div>
 	<th:block th:fragment="javascript">
-		<script type="text/javascript"
-			src="webjars/jquery/2.2.4/jquery.min.js"
-			th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
-		<script type="text/javascript"
-			th:src="@{/webjars/react/15.3.2/react.min.js}"></script>
-		<script type="text/javascript"
-			th:src="@{/webjars/react/15.3.2/react-dom.min.js}"></script>
-		<script type="text/javascript"
+		<script type="text/javascript" th:data-main="@{/resources/js/config}"
 			th:src="@{/webjars/babel/5.8.38/browser.min.js}"></script>
-		<script type="text/javascript"
-			src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"
-			th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
-		<script type="text/javascript" src="/resources/js/common.js"
-			th:src="@{/resources/js/common.js}"></script>
+		<script type="text/javascript" th:data-main="@{/resources/js/config}"
+			th:src="@{/webjars/requirejs/2.3.3/require.min.js}"></script>
+
 	</th:block>
 </body>
 </html>
